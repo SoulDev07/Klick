@@ -53,13 +53,13 @@ const FooterInspiration = () => {
 const Footer = () => {
   return (
     <div className='relative -mt-px overflow-hidden bg-transparent text-black dark:text-white lg:min-h-170'>
-      <div className="relative z-10 mx-auto flex h-full max-w-[1600px] lg:px-16">
+      <div className="relative z-10 mx-auto flex h-full max-w-8xl">
         <div className="flex w-full flex-col lg:min-h-170 lg:flex-row">
-          <div className="flex border-b border-black/20 dark:border-white/10 lg:flex-1 lg:border-b-0 lg:border-r">
+          <div className="flex lg:border-r border-black/20 dark:border-white/20 ">
             <FooterInspiration />
           </div>
-          <div className="hidden w-full border-t border-black/20 dark:border-white/10 sm:grid sm:grid-cols-2 lg:flex lg:h-full lg:flex-1 lg:flex-col lg:border-t-0">
-            <ClickHeart count={10} className="flex min-h-[24rem] border-r border-black/20 dark:border-white/10 lg:min-h-0 lg:flex-1 lg:border-b lg:border-r-0">
+          <div className="hidden w-full border-t border-black/20 dark:border-white/20 sm:grid sm:grid-cols-2 lg:flex lg:h-full lg:flex-1 lg:flex-col lg:border-t-0">
+            <ClickHeart count={10} className="flex min-h-[24rem] border-r border-black/20 dark:border-white/20 lg:min-h-0 lg:flex-1 lg:border-b lg:border-r-0">
               <FooterClickSection title="Click if you love the project" />
             </ClickHeart>
             <ClickSonar className="flex min-h-[24rem] lg:min-h-0 lg:flex-1">
