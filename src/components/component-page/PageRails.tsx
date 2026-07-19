@@ -5,30 +5,41 @@ const railSegmentClass =
 
 type PatternRailProps = {
   side: 'left' | 'right'
+  segmentCount: number
 }
 
 type PageRailsProps = {
   children: ReactNode
+  segmentCount?: number
 }
 
-export const PatternRail = ({ side }: PatternRailProps) => {
+const PatternRail = ({ side, segmentCount }: PatternRailProps) => {
+  const sideBorder = side === 'left' ? 'border-r' : 'border-l'
+  const railSegments = Array.from({ length: segmentCount * 8 })
+
   return (
     <div
-      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'right-full' : 'left-full'} flex flex-col overflow-hidden text-white/8 w-full`}
+      className={`pointer-events-none absolute inset-y-0 ${side === 'left' ? 'left-0' : 'right-0'} hidden w-8 flex-col overflow-hidden text-white/8 min-[769px]:flex lg:w-14 xl:w-28`}
+      style={{ '--rail-segments': segmentCount } as React.CSSProperties}
     >
-      <div
-        className={`h-full shrink-0 border-black/10 dark:border-white/10 ${railSegmentClass}`}
-      />
+      {railSegments.map((_, index) => (
+        <div
+          key={`${side}-${index}`}
+          className={`h-[calc((100vh-80px)/var(--rail-segments))] shrink-0 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-black/20 dark:border-white/20 ${railSegmentClass}`}
+        />
+      ))}
     </div>
   )
 }
 
-const PageRails = ({ children }: PageRailsProps) => {
+const PageRails = ({ children, segmentCount = 29 }: PageRailsProps) => {
+  const normalizedSegmentCount = Math.max(1, Math.floor(segmentCount))
+
   return (
-    <div className="relative">
-      <PatternRail side="left"/>
-      <PatternRail side="right"/>
-      <div className="lg:border-x border-black/20 dark:border-white/20">{children}</div>
+    <div className="relative min-[769px]:-mx-8 lg:-mx-14 xl:-mx-28">
+      <PatternRail side="left" segmentCount={normalizedSegmentCount} />
+      <PatternRail side="right" segmentCount={normalizedSegmentCount} />
+      <div className="min-[769px]:px-8 lg:px-14 xl:px-28">{children}</div>
     </div>
   )
 }
