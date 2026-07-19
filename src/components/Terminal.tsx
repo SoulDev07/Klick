@@ -46,8 +46,8 @@ const Terminal = ({ code, fileName }: { code: string; fileName?: string }): Reac
   };
 
   return (
-    <div className="w-full max-w-[42rem] rounded-md border border-black/10 dark:border-white/10 bg-neutral-100 dark:bg-[#0b0b0b] overflow-hidden transition-all duration-200">
-      
+    <div className="w-full max-w-[42rem] border border-black/10 dark:border-white/10 bg-neutral-100 dark:bg-[#0b0b0b] overflow-hidden transition-all duration-200">
+
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-black/5 dark:border-white/5">
         <span className="text-[10px] font-mono text-black/40 dark:text-white/40 uppercase tracking-widest">

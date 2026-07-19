@@ -18,7 +18,7 @@ const InstallationOptions = ({ CLICode, ManualCode }: InstallationOptionsProps) 
 
   return (
     <div className="mt-4 w-full max-w-[42rem]">
-      <div className="mb-3 inline-flex rounded-md border border-black/10 bg-neutral-100 p-1 dark:border-white/10 dark:bg-[#0b0b0b]">
+      <div className="mb-3 inline-flex border border-black/10 bg-neutral-100 p-1 dark:border-white/10 dark:bg-[#0b0b0b]">
         {options.map((option) => (
           <button
             key={option.id}

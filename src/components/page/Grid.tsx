@@ -114,7 +114,7 @@ const Grid = (): JSX.Element => {
       id="effects-grid"
       className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white"
     >
-      <div className="relative z-10 w-full border-b border-black/20 dark:border-white/10 lg:border-x">
+      <div className="relative z-10 w-full border-b border-black/20 dark:border-white/20">
         <div className="grid w-full grid-cols-2 justify-items-center gap-x-1 gap-y-8 px-0 pb-16 pt-8 min-[390px]:gap-x-3 sm:gap-x-10 sm:gap-y-12 sm:px-6 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
           <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
           <EffectCard
