@@ -10,7 +10,7 @@ const colorOptions = ["#FFFFFF", "#000000", "#a3e635", "#f59e0b", "#8b5cf6"]
 const SineWave = () => {
   const [color, setColor] = useState("#ffffff")
   const [waveSpeed, setWaveSpeed] = useState(0.2)
-  const [expandSpeed, setExpandSpeed] = useState(4)
+  const [expandSpeed, setExpandSpeed] = useState(2)
   const [amplitude, setAmplitude] = useState(20)
 
   const code = `<ClickSineWave

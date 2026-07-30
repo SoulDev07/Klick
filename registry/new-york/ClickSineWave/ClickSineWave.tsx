@@ -24,7 +24,7 @@ type ClickSineWaveProps = {
 export default function ClickSineWave({
   strokeColor = '#fff',
   waveSpeed = 0.2,
-  expandSpeed = 4,
+  expandSpeed = 2,
   amplitude = 20,
   lineWidth = 1,
   duration = 2000,
