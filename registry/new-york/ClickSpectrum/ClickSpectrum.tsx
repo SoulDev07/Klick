@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
@@ -37,6 +37,11 @@ export default function ClickSpectrum({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<SpectrumParticle[]>([]);
   const animIdRef = useRef<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,7 +53,7 @@ export default function ClickSpectrum({
     syncSize();
     window.addEventListener('resize', syncSize);
     return () => window.removeEventListener('resize', syncSize);
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -95,7 +100,7 @@ export default function ClickSpectrum({
     return () => {
       if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
-  }, [strokeColor, duration, barDecay, ringSpeed, lineWidth]);
+  }, [mounted, strokeColor, duration, barDecay, ringSpeed, lineWidth]);
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -118,7 +123,7 @@ export default function ClickSpectrum({
       <div style={{ display: 'contents' }} onClick={handleClick}>
         {children}
       </div>
-      {typeof window !== 'undefined' &&
+      {mounted &&
         createPortal(
           <canvas
             ref={canvasRef}

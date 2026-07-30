@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
@@ -33,6 +33,11 @@ export default function ClickInflate({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<InflateParticle[]>([]);
   const animIdRef = useRef<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,7 +49,7 @@ export default function ClickInflate({
     syncSize();
     window.addEventListener('resize', syncSize);
     return () => window.removeEventListener('resize', syncSize);
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -84,7 +89,7 @@ export default function ClickInflate({
     return () => {
       if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
-  }, [strokeColor, duration, lerpSpeed, deflateAt, lineWidth]);
+  }, [mounted, strokeColor, duration, lerpSpeed, deflateAt, lineWidth]);
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -104,7 +109,7 @@ export default function ClickInflate({
       <div style={{ display: 'contents' }} onClick={handleClick}>
         {children}
       </div>
-      {typeof window !== 'undefined' &&
+      {mounted &&
         createPortal(
           <canvas
             ref={canvasRef}

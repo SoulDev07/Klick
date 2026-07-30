@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
@@ -40,6 +40,11 @@ export default function ClickBubble({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<BubbleParticle[]>([]);
   const animIdRef = useRef<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -51,7 +56,7 @@ export default function ClickBubble({
     syncSize();
     window.addEventListener('resize', syncSize);
     return () => window.removeEventListener('resize', syncSize);
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -117,6 +122,7 @@ export default function ClickBubble({
       if (animIdRef.current !== null) cancelAnimationFrame(animIdRef.current);
     };
   }, [
+    mounted,
     strokeColor,
     fillOpacity,
     wobbleFreq,
@@ -146,7 +152,7 @@ export default function ClickBubble({
       <div style={{ display: 'contents' }} onClick={handleClick}>
         {children}
       </div>
-      {typeof window !== 'undefined' &&
+      {mounted &&
         createPortal(
           <canvas
             ref={canvasRef}
