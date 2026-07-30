@@ -46,6 +46,10 @@ import ClickSupernova from "../../../registry/new-york/ClickSupernova/ClickSuper
 import ClickSynapse from "../../../registry/new-york/ClickSynapse/ClickSynapse";
 import ClickTesseract from "../../../registry/new-york/ClickTesseract/ClickTesseract";
 import ClickWarp from "../../../registry/new-york/ClickWarp/ClickWarp";
+import ClickSineWave from "../../../registry/new-york/ClickSineWave/ClickSineWave";
+import ClickSpectrum from "../../../registry/new-york/ClickSpectrum/ClickSpectrum";
+import ClickInflate from "../../../registry/new-york/ClickInflate/ClickInflate";
+import ClickBubble from "../../../registry/new-york/ClickBubble/ClickBubble";
 import EffectCard from "../EffectCard";
 import ClickPrompt from "../../../registry/new-york/ClickPrompt/ClickPrompt";
 import { useTheme } from "../ThemeContext";
@@ -228,6 +232,10 @@ const Grid = (): JSX.Element => {
             to="/Tesseract"
           />
           <EffectCard title="Warp" Wrapper={ClickWarp} to="/Warp" />
+          <EffectCard title="Sine Wave" Wrapper={ClickSineWave} to="/SineWave" />
+          <EffectCard title="Spectrum" Wrapper={ClickSpectrum} to="/Spectrum" />
+          <EffectCard title="Inflate" Wrapper={ClickInflate} to="/Inflate" />
+          <EffectCard title="Bubble" Wrapper={ClickBubble} to="/Bubble" />
         </div>
       </div>
       <Footer />

@@ -50,6 +50,10 @@ import Load from './components/component-page/Load'
 import Sonar from './components/component-page/Sonar'
 import SuperNova from './components/component-page/SuperNova'
 import Prompt from './components/component-page/Prompt'
+import Bubble from './components/component-page/Bubble'
+import Inflate from './components/component-page/Inflate'
+import SineWave from './components/component-page/SineWave'
+import Spectrum from './components/component-page/Spectrum'
 import Footer from './components/Footer'
 import Footer2 from './components/Footer2'
 import ScrollToTop from './components/ScrollToTop'
@@ -79,6 +83,7 @@ const App = () => {
             <Route path="/BlackHole" element={<BlackHole />} />
             <Route path="/Blast" element={<Blast />} />
             <Route path="/BoundingBox" element={<BoundingBox />} />
+            <Route path="/Bubble" element={<Bubble />} />
             <Route path="/BulletTime" element={<BulletTime />} />
             <Route path="/Diffusion" element={<Diffusion />} />
             <Route path="/DoubleSonar" element={<DoubleSonar />} />
@@ -98,6 +103,7 @@ const App = () => {
             <Route path="/Ghost" element={<Ghost />} />
             <Route path="/Heart" element={<Heart />} />
             <Route path="/HoloSphere" element={<HoloSphere />} />
+            <Route path="/Inflate" element={<Inflate />} />
             <Route path="/Load" element={<Load />} />
             <Route path="/MatrixRain" element={<MatrixRain />} />
             <Route path="/Ping" element={<Ping />} />
@@ -113,9 +119,11 @@ const App = () => {
             <Route path="/Smoke" element={<Smoke />} />
             <Route path="/SolidRipple" element={<SolidRipple />} />
             <Route path="/Sonar" element={<Sonar />} />
+            <Route path="/SineWave" element={<SineWave />} />
             <Route path="/Spark" element={<Spark />} />
             <Route path="/Spark2" element={<Spark2 />} />
             <Route path="/Sparkle" element={<Sparkle />} />
+            <Route path="/Spectrum" element={<Spectrum />} />
             <Route path="/Supernova" element={<SuperNova />} />
             <Route path="/SuperNova" element={<SuperNova />} />
             <Route path="/Splash" element={<Splash />} />

@@ -578,6 +578,54 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "click-sine-wave",
+      "type": "registry:ui",
+      "title": "Sine Wave",
+      "description": "A simple sine wave effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSineWave/ClickSineWave.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-spectrum",
+      "type": "registry:ui",
+      "title": "Spectrum",
+      "description": "A simple spectrum effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickSpectrum/ClickSpectrum.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-inflate",
+      "type": "registry:ui",
+      "title": "Inflate",
+      "description": "A simple inflate effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickInflate/ClickInflate.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "click-bubble",
+      "type": "registry:ui",
+      "title": "Bubble",
+      "description": "A simple bubble effect component.",
+      "files": [
+        {
+          "path": "registry/new-york/ClickBubble/ClickBubble.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
