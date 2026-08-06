@@ -140,59 +140,59 @@ const Footer2 = () => {
 
       {isRequestOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 px-4 py-8 backdrop-blur-sm dark:bg-black/70"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 px-5 py-6 backdrop-blur-sm dark:bg-black/70 sm:px-4 sm:py-8"
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
           onMouseDown={() => setIsRequestOpen(false)}
         >
           <form
-            className="w-full max-w-lg border border-black/15 bg-white p-5 text-black shadow-[8px_8px_0_rgba(0,0,0,0.12)] dark:border-white/20 dark:bg-black dark:text-white dark:shadow-[8px_8px_0_rgba(255,255,255,0.08)] sm:p-6"
+            className="max-h-[calc(100dvh-3rem)] w-full max-w-[21rem] overflow-y-auto rounded-lg border border-black/15 bg-white p-3.5 text-black shadow-[4px_4px_0_rgba(0,0,0,0.12)] dark:border-white/20 dark:bg-black dark:text-white dark:shadow-[4px_4px_0_rgba(255,255,255,0.08)] sm:max-h-[calc(100dvh-4rem)] sm:max-w-lg sm:p-6 sm:shadow-[8px_8px_0_rgba(0,0,0,0.12)] sm:dark:shadow-[8px_8px_0_rgba(255,255,255,0.08)]"
             onSubmit={(event) => event.preventDefault()}
             onMouseDown={(event) => event.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">
-              <h2 id={titleId} className="font-geist-pixel text-2xl font-semibold tracking-wide">
+              <h2 id={titleId} className="font-geist-pixel text-lg font-semibold tracking-wide sm:text-2xl">
                 Request Animation
               </h2>
               <button
                 type="button"
                 aria-label="Close request animation form"
                 onClick={() => setIsRequestOpen(false)}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/15 text-black/70 transition hover:border-black/40 hover:bg-black/[0.04] hover:text-black dark:border-white/20 dark:text-white/70 dark:hover:border-white/40 dark:hover:bg-white/[0.06] dark:hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-black/15 text-black/70 transition hover:border-black/40 hover:bg-black/[0.04] hover:text-black dark:border-white/20 dark:text-white/70 dark:hover:border-white/40 dark:hover:bg-white/[0.06] dark:hover:text-white sm:h-9 sm:w-9"
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div className="mt-6 grid gap-5">
-              <label className="grid gap-2 text-sm font-medium text-black/75 dark:text-white/75">
-                Description * <span className="text-black/45 dark:text-white/45"></span>
+            <div className="mt-4 grid gap-3.5 sm:mt-6 sm:gap-5">
+              <label className="grid gap-1.5 text-xs font-medium text-black/75 dark:text-white/75 sm:gap-2 sm:text-sm">
+                Description *
                 <textarea
                   required
-                  rows={7}
+                  rows={5}
                   placeholder="Describe the animation you want..."
-                  className="min-h-44 w-full resize-y rounded-lg border border-black/15 bg-white px-3 py-3 font-sans text-sm text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15"
+                  className="min-h-28 w-full resize-y rounded-lg border border-black/15 bg-white px-3 py-2.5 font-sans text-xs text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15 sm:min-h-44 sm:py-3 sm:text-sm"
                 />
               </label>
 
-              <label className="grid gap-2 text-sm font-medium text-black/75 dark:text-white/75">
+              <label className="grid gap-1.5 text-xs font-medium text-black/75 dark:text-white/75 sm:gap-2 sm:text-sm">
                 Reference URL <span className="text-black/40 dark:text-white/40">(optional)</span>
                 <input
                   type="url"
                   placeholder="https://example.com/reference"
-                  className="h-11 w-full rounded-lg border border-black/15 bg-white px-3 font-sans text-sm text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15"
+                  className="h-10 w-full rounded-lg border border-black/15 bg-white px-3 font-sans text-xs text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15 sm:h-11 sm:text-sm"
                 />
               </label>
 
-              <label className="grid gap-2 text-sm font-medium text-black/75 dark:text-white/75">
+              <label className="grid gap-1.5 text-xs font-medium text-black/75 dark:text-white/75 sm:gap-2 sm:text-sm">
                 GitHub Username <span className="text-black/40 dark:text-white/40">(optional)</span>
-                <div className="flex h-11 items-center rounded-lg border border-black/15 bg-white px-3 transition focus-within:border-black/50 focus-within:ring-2 focus-within:ring-black/10 dark:border-white/20 dark:bg-black dark:focus-within:border-white/50 dark:focus-within:ring-white/15">
-                  <span className="font-sans text-sm text-black/35 dark:text-white/35">@</span>
+                <div className="flex h-10 items-center rounded-lg border border-black/15 bg-white px-3 transition focus-within:border-black/50 focus-within:ring-2 focus-within:ring-black/10 dark:border-white/20 dark:bg-black dark:focus-within:border-white/50 dark:focus-within:ring-white/15 sm:h-11">
+                  <span className="font-sans text-xs text-black/35 dark:text-white/35 sm:text-sm">@</span>
                   <input
                     type="text"
                     placeholder="username"
-                    className="h-full min-w-0 flex-1 bg-transparent pl-2 font-sans text-sm text-black outline-none placeholder:text-black/35 dark:text-white dark:placeholder:text-white/35"
+                    className="h-full min-w-0 flex-1 bg-transparent pl-2 font-sans text-xs text-black outline-none placeholder:text-black/35 dark:text-white dark:placeholder:text-white/35 sm:text-sm"
                   />
                 </div>
               </label>
@@ -200,7 +200,7 @@ const Footer2 = () => {
 
             <button
               type="submit"
-              className="mt-7 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-black bg-black px-4 font-pixel text-sm font-semibold text-white transition hover:bg-black/85 dark:border-white dark:bg-white dark:text-black dark:hover:bg-white/85"
+              className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-black bg-black px-4 font-pixel text-xs font-semibold text-white transition hover:bg-black/85 dark:border-white dark:bg-white dark:text-black dark:hover:bg-white/85 sm:mt-7 sm:h-11 sm:text-sm"
             >
               <Send size={16} />
               Submit Request
