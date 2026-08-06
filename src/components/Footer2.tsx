@@ -14,14 +14,6 @@ const quickLinks = [
 const linkClass =
   'w-fit text-sm font-medium text-black/60 transition hover:text-black dark:text-white/60 dark:hover:text-white'
 
-const animationCategories = [
-  'Click animation',
-  'Cursor effect',
-  'Page transition',
-  'Micro interaction',
-  'Other',
-]
-
 const FooterLink = ({
   label,
   to,
@@ -175,30 +167,21 @@ const Footer2 = () => {
 
             <div className="mt-6 grid gap-5">
               <label className="grid gap-2 text-sm font-medium text-black/75 dark:text-white/75">
-                Category
-                <select
+                Description * <span className="text-black/45 dark:text-white/45"></span>
+                <textarea
                   required
-                  defaultValue=""
-                  className="h-11 w-full rounded-lg border border-black/15 bg-white px-3 font-sans text-sm text-black outline-none transition focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:focus:border-white/50 dark:focus:ring-white/15"
-                >
-                  <option value="" disabled>
-                    Select a category
-                  </option>
-                  {animationCategories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
+                  rows={7}
+                  placeholder="Describe the animation you want..."
+                  className="min-h-44 w-full resize-y rounded-lg border border-black/15 bg-white px-3 py-3 font-sans text-sm text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15"
+                />
               </label>
 
               <label className="grid gap-2 text-sm font-medium text-black/75 dark:text-white/75">
-                Description
-                <textarea
-                  required
-                  rows={5}
-                  placeholder="Links, references, notion doc or what the animation should do..."
-                  className="min-h-32 w-full resize-y rounded-lg border border-black/15 bg-white px-3 py-3 font-sans text-sm text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15"
+                Reference URL <span className="text-black/40 dark:text-white/40">(optional)</span>
+                <input
+                  type="url"
+                  placeholder="https://example.com/reference"
+                  className="h-11 w-full rounded-lg border border-black/15 bg-white px-3 font-sans text-sm text-black outline-none transition placeholder:text-black/35 focus:border-black/50 focus:ring-2 focus:ring-black/10 dark:border-white/20 dark:bg-black dark:text-white dark:placeholder:text-white/35 dark:focus:border-white/50 dark:focus:ring-white/15"
                 />
               </label>
 
