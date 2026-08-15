@@ -54,6 +54,7 @@ import EffectCard from "../EffectCard";
 import ClickPrompt from "../../../registry/new-york/ClickPrompt/ClickPrompt";
 import { useTheme } from "../ThemeContext";
 import Footer from "../Footer";
+import Contributors from "../Contributors";
 
 const SolidRippleGridPreview = ({ color }: { color?: string }) => (
   <ThemeAwareGridPreview type="solid-ripple" color={color} />
@@ -239,6 +240,7 @@ const Grid = (): JSX.Element => {
         </div>
       </div>
       <Footer />
+      <Contributors />
     </div>
   );
 };
