@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "./components/page/Home";
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
@@ -62,6 +62,8 @@ import ScrollToTop from "./components/ScrollToTop";
 const contentInsetClass = "px-2 sm:px-4 md:px-6 lg:px-14 xl:px-28";
 
 const App = () => {
+  const [effectSearchQuery, setEffectSearchQuery] = useState("");
+
   return (
     <div className="min-h-screen w-full relative">
       {/* Radial Gradient Background from Bottom */}
@@ -70,12 +72,18 @@ const App = () => {
 
       {/* <div className="min-h-screen overflow-hidden bg-neutral-100 text-black dark:bg-zinc-950 dark:text-white"> */}
       <div className="min-h-screen overflow-hidden text-black dark:text-white">
-        <Navbar />
+        <Navbar
+          effectSearchQuery={effectSearchQuery}
+          onEffectSearchQueryChange={setEffectSearchQuery}
+        />
         <main className="relative">
           <div className={`relative z-10 ${contentInsetClass}`}>
             <ScrollToTop />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={<Home effectSearchQuery={effectSearchQuery} />}
+              />
               <Route path="/Agitate" element={<Agitate />} />
               <Route path="/Alignment" element={<Alignment />} />
               <Route path="/Binary" element={<Binary />} />

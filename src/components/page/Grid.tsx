@@ -113,7 +113,79 @@ const ThemeAwareGridPreview = ({
   );
 };
 
-const Grid = (): JSX.Element => {
+type EffectEntry = {
+  title: string;
+  Wrapper: React.ComponentType<any>;
+  to: string;
+};
+
+const EFFECTS: EffectEntry[] = [
+  { title: "Agitate", Wrapper: ClickAgitate, to: "/Agitate" },
+  { title: "Alignment", Wrapper: ClickAlignment, to: "/Alignment" },
+  { title: "Binary", Wrapper: ClickBinary, to: "/Binary" },
+  { title: "Black Hole", Wrapper: ClickBlackHole, to: "/BlackHole" },
+  { title: "Blast", Wrapper: ClickBlast, to: "/Blast" },
+  { title: "Bounding Box", Wrapper: ClickBoundingBox, to: "/BoundingBox" },
+  { title: "Bullet Time", Wrapper: ClickBulletTime, to: "/BulletTime" },
+  { title: "Diffusion", Wrapper: ClickDiffusion, to: "/Diffusion" },
+  { title: "Double Sonar", Wrapper: ClickDoubleSonar, to: "/DoubleSonar" },
+  { title: "Droplet", Wrapper: ClickDroplet, to: "/Droplet" },
+  { title: "Embers", Wrapper: ClickEmbers, to: "/Embers" },
+  { title: "Fire", Wrapper: ClickFire, to: "/Fire" },
+  { title: "Fire Trail", Wrapper: ClickFireTrail, to: "/FireTrail" },
+  { title: "Firework", Wrapper: ClickFirework, to: "/Firework" },
+  { title: "Fission", Wrapper: ClickFission, to: "/Fission" },
+  { title: "Flame", Wrapper: ClickFlame, to: "/Flame" },
+  { title: "Float", Wrapper: ClickFloat, to: "/Float" },
+  { title: "Flow Field", Wrapper: ClickFlowField, to: "/FlowField" },
+  { title: "Focus", Wrapper: ClickFocus, to: "/Focus" },
+  { title: "Fusion", Wrapper: ClickFusion, to: "/Fusion" },
+  { title: "Generative", Wrapper: ClickGenerative, to: "/Generative" },
+  { title: "Geo", Wrapper: ClickGeo, to: "/Geo" },
+  { title: "Ghost", Wrapper: ClickGhost, to: "/Ghost" },
+  { title: "Heart", Wrapper: ClickHeart, to: "/Heart" },
+  { title: "Holo Sphere", Wrapper: ClickHoloSphere, to: "/HoloSphere" },
+  { title: "Load", Wrapper: ClickLoad, to: "/Load" },
+  { title: "Matrix Rain", Wrapper: ClickMatrixRain, to: "/MatrixRain" },
+  { title: "Ping", Wrapper: ClickPing, to: "/Ping" },
+  { title: "Quantum", Wrapper: ClickQuantum, to: "/Quantum" },
+  { title: "Radiate", Wrapper: ClickRadiate, to: "/Radiate" },
+  { title: "Rain", Wrapper: ClickRain, to: "/Rain" },
+  { title: "Resonance", Wrapper: ResonanceGridPreview, to: "/Resonance" },
+  { title: "Ripple", Wrapper: ClickRipple, to: "/Ripple" },
+  { title: "Ripple Matrix", Wrapper: ClickRippleMatrix, to: "/RippleMatrix" },
+  { title: "Shatter", Wrapper: ClickShatter, to: "/Shatter" },
+  { title: "Skull", Wrapper: ClickSkull, to: "/Skull" },
+  { title: "Smoke", Wrapper: ClickSmoke, to: "/Smoke" },
+  { title: "Sonar", Wrapper: ClickSonar, to: "/Sonar" },
+  { title: "Solid Ripple", Wrapper: SolidRippleGridPreview, to: "/SolidRipple" },
+  { title: "Spark", Wrapper: ClickSpark, to: "/Spark" },
+  { title: "Spark2", Wrapper: ClickSpark2, to: "/Spark2" },
+  { title: "Sparkle", Wrapper: ClickSparkle, to: "/Sparkle" },
+  { title: "Splash", Wrapper: ClickSplash, to: "/Splash" },
+  { title: "Supernova", Wrapper: ClickSupernova, to: "/Supernova" },
+  { title: "Synapse", Wrapper: ClickSynapse, to: "/Synapse" },
+  { title: "Prompt", Wrapper: ClickPrompt, to: "/Prompt" },
+  { title: "Tesseract", Wrapper: ClickTesseract, to: "/Tesseract" },
+  { title: "Warp", Wrapper: ClickWarp, to: "/Warp" },
+  { title: "Sine Wave", Wrapper: ClickSineWave, to: "/SineWave" },
+  { title: "Spectrum", Wrapper: ClickSpectrum, to: "/Spectrum" },
+  { title: "Inflate", Wrapper: ClickInflate, to: "/Inflate" },
+  { title: "Bubble", Wrapper: ClickBubble, to: "/Bubble" },
+];
+
+type GridProps = {
+  query: string;
+};
+
+const Grid = ({ query }: GridProps): JSX.Element => {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredEffects = normalizedQuery
+    ? EFFECTS.filter((effect) =>
+        effect.title.toLowerCase().includes(normalizedQuery),
+      )
+    : EFFECTS;
+
   return (
     <div
       id="effects-grid"
@@ -121,123 +193,15 @@ const Grid = (): JSX.Element => {
     >
       <div className="relative z-10 w-full border-b border-black/20 dark:border-white/20">
         <div className="grid w-full grid-cols-2 justify-items-center gap-x-1 gap-y-8 px-0 pb-16 pt-8 min-[390px]:gap-x-3 sm:gap-x-10 sm:gap-y-12 sm:px-6 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
-          <EffectCard title="Agitate" Wrapper={ClickAgitate} to="/Agitate" />
-          <EffectCard
-            title="Alignment"
-            Wrapper={ClickAlignment}
-            to="/Alignment"
-          />
-          <EffectCard title="Binary" Wrapper={ClickBinary} to="/Binary" />
-          <EffectCard
-            title="Black Hole"
-            Wrapper={ClickBlackHole}
-            to="/BlackHole"
-          />
-          <EffectCard title="Blast" Wrapper={ClickBlast} to="/Blast" />
-          <EffectCard
-            title="Bounding Box"
-            Wrapper={ClickBoundingBox}
-            to="/BoundingBox"
-          />
-          <EffectCard
-            title="Bullet Time"
-            Wrapper={ClickBulletTime}
-            to="/BulletTime"
-          />
-          <EffectCard
-            title="Diffusion"
-            Wrapper={ClickDiffusion}
-            to="/Diffusion"
-          />
-          <EffectCard
-            title="Double Sonar"
-            Wrapper={ClickDoubleSonar}
-            to="/DoubleSonar"
-          />
-          <EffectCard title="Droplet" Wrapper={ClickDroplet} to="/Droplet" />
-          <EffectCard title="Embers" Wrapper={ClickEmbers} to="/Embers" />
-          <EffectCard title="Fire" Wrapper={ClickFire} to="/Fire" />
-          <EffectCard
-            title="Fire Trail"
-            Wrapper={ClickFireTrail}
-            to="/FireTrail"
-          />
-          <EffectCard title="Firework" Wrapper={ClickFirework} to="/Firework" />
-          <EffectCard title="Fission" Wrapper={ClickFission} to="/Fission" />
-          <EffectCard title="Flame" Wrapper={ClickFlame} to="/Flame" />
-          <EffectCard title="Float" Wrapper={ClickFloat} to="/Float" />
-          <EffectCard
-            title="Flow Field"
-            Wrapper={ClickFlowField}
-            to="/FlowField"
-          />
-          <EffectCard title="Focus" Wrapper={ClickFocus} to="/Focus" />
-          <EffectCard title="Fusion" Wrapper={ClickFusion} to="/Fusion" />
-          <EffectCard
-            title="Generative"
-            Wrapper={ClickGenerative}
-            to="/Generative"
-          />
-          <EffectCard title="Geo" Wrapper={ClickGeo} to="/Geo" />
-          <EffectCard title="Ghost" Wrapper={ClickGhost} to="/Ghost" />
-          <EffectCard title="Heart" Wrapper={ClickHeart} to="/Heart" />
-          <EffectCard
-            title="Holo Sphere"
-            Wrapper={ClickHoloSphere}
-            to="/HoloSphere"
-          />
-          <EffectCard title="Load" Wrapper={ClickLoad} to="/Load" />
-          <EffectCard
-            title="Matrix Rain"
-            Wrapper={ClickMatrixRain}
-            to="/MatrixRain"
-          />
-          <EffectCard title="Ping" Wrapper={ClickPing} to="/Ping" />
-          <EffectCard title="Quantum" Wrapper={ClickQuantum} to="/Quantum" />
-          <EffectCard title="Radiate" Wrapper={ClickRadiate} to="/Radiate" />
-          <EffectCard title="Rain" Wrapper={ClickRain} to="/Rain" />
-          <EffectCard
-            title="Resonance"
-            Wrapper={ResonanceGridPreview}
-            to="/Resonance"
-          />
-          <EffectCard title="Ripple" Wrapper={ClickRipple} to="/Ripple" />
-          <EffectCard
-            title="Ripple Matrix"
-            Wrapper={ClickRippleMatrix}
-            to="/RippleMatrix"
-          />
-          <EffectCard title="Shatter" Wrapper={ClickShatter} to="/Shatter" />
-          <EffectCard title="Skull" Wrapper={ClickSkull} to="/Skull" />
-          <EffectCard title="Smoke" Wrapper={ClickSmoke} to="/Smoke" />
-          <EffectCard title="Sonar" Wrapper={ClickSonar} to="/Sonar" />
-          <EffectCard
-            title="Solid Ripple"
-            Wrapper={SolidRippleGridPreview}
-            to="/SolidRipple"
-          />
-          <EffectCard title="Spark" Wrapper={ClickSpark} to="/Spark" />
-          <EffectCard title="Spark2" Wrapper={ClickSpark2} to="/Spark2" />
-          <EffectCard title="Sparkle" Wrapper={ClickSparkle} to="/Sparkle" />
-          <EffectCard title="Splash" Wrapper={ClickSplash} to="/Splash" />
-          <EffectCard
-            title="Supernova"
-            Wrapper={ClickSupernova}
-            to="/Supernova"
-          />
-          <EffectCard title="Synapse" Wrapper={ClickSynapse} to="/Synapse" />
-          <EffectCard title="Prompt" Wrapper={ClickPrompt} to="/Prompt" />
-          <EffectCard
-            title="Tesseract"
-            Wrapper={ClickTesseract}
-            to="/Tesseract"
-          />
-          <EffectCard title="Warp" Wrapper={ClickWarp} to="/Warp" />
-          <EffectCard title="Sine Wave" Wrapper={ClickSineWave} to="/SineWave" />
-          <EffectCard title="Spectrum" Wrapper={ClickSpectrum} to="/Spectrum" />
-          <EffectCard title="Inflate" Wrapper={ClickInflate} to="/Inflate" />
-          <EffectCard title="Bubble" Wrapper={ClickBubble} to="/Bubble" />
+          {filteredEffects.map(({ title, Wrapper, to }) => (
+            <EffectCard key={to} title={title} Wrapper={Wrapper} to={to} />
+          ))}
         </div>
+        {filteredEffects.length === 0 && (
+          <p className="-mt-8 pb-16 text-center font-sans text-[13px] tracking-[0.1em] uppercase text-gray-500 dark:text-[#555] sm:pb-24">
+            No effects found for &quot;<span className="bg-accent ">{query}</span>&quot; :(
+          </p>
+        )}
       </div>
       <Footer />
       <Contributors />
@@ -246,3 +210,4 @@ const Grid = (): JSX.Element => {
 };
 
 export default Grid;
+

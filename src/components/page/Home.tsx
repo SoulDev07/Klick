@@ -74,14 +74,18 @@ const PatternRail = ({ side }: { side: 'left' | 'right' }) => {
       {railSegments.map((_, index) => (
         <div
           key={`${side}-${index}`}
-          className={`flex-1 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-black/20 dark:border-white/20 ${railSegmentClass}`}
+          className={`h-60 shrink-0 ${sideBorder} ${index !== railSegments.length - 1 ? 'border-b' : ''} border-black/20 dark:border-white/20 ${railSegmentClass}`}
         />
       ))}
     </div>
   )
 }
 
-const Home = () => {
+type HomeProps = {
+  effectSearchQuery: string
+}
+
+const Home = ({ effectSearchQuery }: HomeProps) => {
   const [copied, setCopied] = useState(false)
   const [heroVisible, setHeroVisible] = useState(false)
   const [installCommandIndex, setInstallCommandIndex] = useState(0)
@@ -247,7 +251,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Grid />
+        <Grid query={effectSearchQuery} />
       </div>
     </div>
   )

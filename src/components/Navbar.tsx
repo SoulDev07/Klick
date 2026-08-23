@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Search, X } from 'lucide-react'
 import GithubIcon from './icons/GithubIcon'
 import TwitterXIcon from './icons/TwitterXIcon'
 import BrightnessDownIcon from './icons/BrightnessDownIcon'
 import { useTheme } from './ThemeContext'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const GITHUB_REPO = 'devsterxyz/Klick'
 
@@ -24,9 +25,39 @@ const StarIcon = ({ size = 16, color = 'currentColor', className = '' }) => (
   </svg>
 )
 
-const Navbar = () => {
+type NavbarProps = {
+  effectSearchQuery: string
+  onEffectSearchQueryChange: (query: string) => void
+}
+
+const Navbar = ({
+  effectSearchQuery,
+  onEffectSearchQueryChange,
+}: NavbarProps) => {
   const { theme, toggleTheme } = useTheme()
   const [stars, setStars] = useState<number | null>(null)
+  const shortcutLabel = 'Ctrl K'
+  const location = useLocation()
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const isHome = location.pathname === '/'
+  const normalizedQuery = effectSearchQuery.trim().toLowerCase()
+
+  useEffect(() => {
+    if (!isHome) {
+      return
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        searchInputRef.current?.focus()
+        searchInputRef.current?.select()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isHome])
 
   useEffect(() => {
     let active = true
@@ -53,7 +84,7 @@ const Navbar = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 h-16 w-full border-b border-black/20 dark:border-white/20 backdrop-blur-sm sm:h-20">
         <div className="h-full max-w-8xl mx-auto border-black/20 dark:border-white/20 lg:border-x">
-          <div className="flex h-full items-center justify-between gap-3 px-4 sm:px-6 md:px-10">
+          <div className="flex h-full items-center justify-between gap-2 px-3 min-[380px]:gap-3 min-[380px]:px-4 sm:px-6 md:px-10">
             <Link
               to="/"
               className="shrink-0 font-geist-pixel text-[25px] font-semibold tracking-wider text-black dark:text-white sm:text-[30px]"
@@ -61,7 +92,45 @@ const Navbar = () => {
               Klick
             </Link>
 
-            <div className="flex min-w-0 items-center gap-2 text-black dark:text-white sm:gap-3">
+            <div className="flex min-w-0 flex-1 items-center justify-end gap-1.5 text-black dark:text-white min-[380px]:gap-2 sm:gap-3">
+              {isHome && (
+                <div className="w-20 min-w-0 min-[360px]:w-28 min-[420px]:w-36 sm:w-44 md:w-56 lg:w-72">
+                  <div className="relative w-full">
+                    <Search
+                      className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-500 dark:text-[#555] sm:left-3 sm:h-4 sm:w-4"
+                      aria-hidden="true"
+                    />
+                    <input
+                      ref={searchInputRef}
+                      type="search"
+                      value={effectSearchQuery}
+                      onChange={(event) => onEffectSearchQueryChange(event.target.value)}
+                      placeholder="Search effects..."
+                      aria-label="Search effects"
+                      aria-keyshortcuts="Control+K Meta+K"
+                      className="h-9 w-full border border-black/20 bg-white/80 pl-8 pr-8 font-sans text-[11px] tracking-wider text-black placeholder:text-gray-500 focus:border-black/40 focus:outline-none dark:border-white/20 dark:bg-neutral-950/80 dark:text-white dark:placeholder:text-[#555] dark:focus:border-white/40 sm:h-10 sm:pl-9 sm:pr-16 sm:text-small [&::-webkit-search-cancel-button]:appearance-none"
+                    />
+                    {!normalizedQuery && (
+                      <kbd
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center border border-black/15 px-1.5 py-0.5 font-sans text-[10px] tracking-wide text-gray-500 dark:border-white/15 dark:text-[#555] md:inline-flex"
+                      >
+                        {shortcutLabel}
+                      </kbd>
+                    )}
+                    {normalizedQuery && (
+                      <button
+                        type="button"
+                        onClick={() => onEffectSearchQueryChange('')}
+                        aria-label="Clear search"
+                        className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center transition-colors hover:text-black dark:text-[#555] dark:hover:text-white hover:cursor-pointer"
+                      >
+                        <X className="h-4 w-4" aria-hidden="true" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
               <button
                 type="button"
                 onClick={toggleTheme}
@@ -101,3 +170,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+
