@@ -1,5 +1,4 @@
-import React, { JSX, useState } from "react";
-import { Search, X } from "lucide-react";
+import React, { JSX } from "react";
 import ClickBinary from "../../../registry/new-york/ClickBinary/ClickBinary";
 import ClickAgitate from "../../../registry/new-york/ClickAgitate/ClickAgitate";
 import ClickAlignment from "../../../registry/new-york/ClickAlignment/ClickAlignment";
@@ -175,15 +174,11 @@ const EFFECTS: EffectEntry[] = [
   { title: "Bubble", Wrapper: ClickBubble, to: "/Bubble" },
 ];
 
-const Grid = (): JSX.Element => {
-  const [query, setQuery] = useState("");
-  const [shortcutLabel] = useState(() =>
-    typeof navigator !== "undefined" &&
-    /Mac|iPhone|iPad|iPod/.test(navigator.userAgent)
-      ? "⌘ K"
-      : "Ctrl K",
-  );
-  const searchInputRef = React.useRef<HTMLInputElement>(null);
+type GridProps = {
+  query: string;
+};
+
+const Grid = ({ query }: GridProps): JSX.Element => {
   const normalizedQuery = query.trim().toLowerCase();
   const filteredEffects = normalizedQuery
     ? EFFECTS.filter((effect) =>
@@ -191,61 +186,12 @@ const Grid = (): JSX.Element => {
       )
     : EFFECTS;
 
-  React.useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        searchInputRef.current?.focus();
-        searchInputRef.current?.select();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   return (
     <div
       id="effects-grid"
       className="relative scroll-mt-16 overflow-hidden bg-transparent text-black dark:text-white"
     >
       <div className="relative z-10 w-full border-b border-black/20 dark:border-white/20">
-        <div className="flex justify-center px-6 pt-8 sm:px-6 md:px-10 xl:px-14">
-          <div className="relative w-full max-w-md">
-            <Search
-              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-[#555]"
-              aria-hidden="true"
-            />
-            <input
-              ref={searchInputRef}
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search effects..."
-              aria-label="Search effects"
-              aria-keyshortcuts="Control+K Meta+K"
-              className="h-10 w-full border border-black/20 bg-transparent pl-9 pr-9 font-sans text-small tracking-wider text-black placeholder:text-gray-500 focus:border-black/40 focus:outline-none dark:border-white/20 dark:text-white dark:placeholder:text-[#555] dark:focus:border-white/40 sm:pr-20 [&::-webkit-search-cancel-button]:appearance-none"
-            />
-            {!normalizedQuery && (
-              <kbd
-                aria-hidden="true"
-                className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center border border-black/15 px-1.5 py-0.5 font-sans text-[10px] tracking-wide text-gray-500 dark:border-white/15 dark:text-[#555] sm:inline-flex"
-              >
-                {shortcutLabel}
-              </kbd>
-            )}
-            {normalizedQuery && (
-              <button
-                type="button"
-                onClick={() => setQuery("")}
-                aria-label="Clear search"
-                className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center transition-colors hover:text-black dark:text-[#555] dark:hover:text-white hover:cursor-pointer "
-              >
-                <X className="h-4 w-4" aria-hidden="true" />
-              </button>
-            )}
-          </div>
-        </div>
         <div className="grid w-full grid-cols-2 justify-items-center gap-x-1 gap-y-8 px-0 pb-16 pt-8 min-[390px]:gap-x-3 sm:gap-x-10 sm:gap-y-12 sm:px-6 sm:pb-24 md:px-10 lg:grid-cols-3 lg:pb-28 xl:grid-cols-4 xl:px-14">
           {filteredEffects.map(({ title, Wrapper, to }) => (
             <EffectCard key={to} title={title} Wrapper={Wrapper} to={to} />
@@ -264,3 +210,4 @@ const Grid = (): JSX.Element => {
 };
 
 export default Grid;
+
