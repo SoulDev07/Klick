@@ -30,7 +30,7 @@ interface ClickSonarProps {
 }
 
 export default function ClickSonar({
-  color = '#fff',
+  color,
   dotCount = 20,
   dotSpread = 80,
   speed = 2.5,
@@ -84,6 +84,10 @@ export default function ClickSonar({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      const resolvedColor = color ?? (
+        document.documentElement.classList.contains('dark') ? '#fff' : '#000'
+      );
+
       systemsRef.current = systemsRef.current.filter((sys: SonarSystem) => {
         sys.life -= sys.decay;
         if (sys.life <= 0) return false;
@@ -91,13 +95,13 @@ export default function ClickSonar({
         sys.r += speed;
 
         ctx.globalAlpha = Math.max(0, sys.life * 0.4);
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = resolvedColor;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(sys.x, sys.y, sys.r, 0, Math.PI * 2);
         ctx.stroke();
 
-        ctx.fillStyle = color;
+        ctx.fillStyle = resolvedColor;
         for (const d of sys.dots) {
           const dist = Math.hypot(d.x, d.y);
           if (dist < sys.r) {

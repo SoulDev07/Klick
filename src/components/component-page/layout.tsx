@@ -1,7 +1,8 @@
-import React, { type ReactNode } from "react";
+import React, { useEffect, type ReactNode } from "react";
 import BackToGridLink from "@/components/BackToGridLink";
 import InstallationOptions from "@/components/InstallationOptions";
 import Terminal from "@/components/Terminal";
+import { useTheme } from "@/components/ThemeContext";
 import PageRails from "./PageRails";
 
 type ComponentPageLayoutProps = {
@@ -128,6 +129,19 @@ export const ColorPicker = ({
   onChange,
   label = "Color",
 }: ColorPickerProps) => {
+  const { theme, contrastColor } = useTheme();
+
+  useEffect(() => {
+    const normalizedColor = value.toLowerCase();
+    const matchesBackground = theme === "light"
+      ? normalizedColor === "#fff" || normalizedColor === "#ffffff"
+      : normalizedColor === "#000" || normalizedColor === "#000000";
+
+    if (matchesBackground) {
+      onChange(contrastColor);
+    }
+  }, [contrastColor, onChange, theme, value]);
+
   return (
     <div className="mb-6 w-full max-w-md">
       <div className="mb-3 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
